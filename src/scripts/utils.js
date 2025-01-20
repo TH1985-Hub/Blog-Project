@@ -1,4 +1,4 @@
-window.UI = {
+export const UI = {
     createElement: function (element, attributes = {}, children = []) {
         if (!element) {
             console.error('No element type provided.');
@@ -7,22 +7,16 @@ window.UI = {
         
         const el = document.createElement(element);
 
-        Object.entries(attributes).forEach(([key, value]) => {
-            el.setAttribute(key, value);
-        });
+        for (const [key, value]   of Object.entries(attributes)) {
 
-        if (!(children instanceof Array)) {
-            children = [children];
+        
+            el.setAttribute(key, value);
         }
 
-        
-        // for (const [key, value] of Object.entries(attributes)) {
-        //     el.setAttribute(key, value);
-        // }
-        
-        // if (!Array.isArray(children)) {
-        //     children = [children]; 
-        // }
+         
+        if (!Array.isArray(children)) {
+            children = [children]; 
+        }
 
         children.forEach(child => {
             if (typeof child === 'string') {
@@ -30,8 +24,8 @@ window.UI = {
             } else if (child instanceof Node) {
                 el.appendChild(child); 
             } else {
-                console.error('Invalid child element:', child);
-                //throw new Error('Child must be a string or a Node.');
+                console.error ('Invalid child element:', child);
+            throw new Error('Child must be a string or a Node.');
             }
         });
         
@@ -44,7 +38,10 @@ window.UI = {
             targetElement.innerHTML = ''; 
             targetElement.appendChild(element);
         } else {
-            console.error(`Target element "${target}" not found.`);
+            console.error (`Target element "${target}" not found.`);
         }
-    }
+    },
 };
+
+
+export default UI;

@@ -1,16 +1,25 @@
-export class PostApi{
+
+import { Storage } from     "../utils/storage.js";
+import { BaseApi } from     "./base.js";
+import {Base_Url}   from    "./const.js";
+
+export class PostApi extends BaseApi{
     constructor(baseUrl){
+        super();
         this.baseUrl = baseUrl;
     }
 
     async getposts(){
         try {
-            const response = await fetch(this.getFullUrl('/posts'));
+            const response = await fetch(`${this.baseUrl}/posts`,{
+                headers: this.getAuthHeaders(),
+ 
+            });
 
-            if(response.status !== 200) {
-                throw new Error(response.statusText);
-            }
-
+            // if(response.status !== 200) {
+            //     throw new Error(response.statusText);
+            // }
+            this.validateResponse(response);
             const posts = await response.json();
 
 
@@ -18,7 +27,7 @@ export class PostApi{
 
 
         } catch(error) {
-            console.error(error);
+            console.error("Error fetching posts:", error.message);
         }
     }
 
@@ -26,70 +35,100 @@ export class PostApi{
     async getPostById(id) {
         try {
             if(!id) {
-                throw new Error('id is required');
+                throw new Error('Post ID is required');
             }
 
 
-            const response = await fetch(this.getFullUrl(`/posts/${id}`));
+            const response = await fetch(`${this.baseUrl}/posts/${id}`,{
+                headers: this.getAuthHeaders(),
+            });
 
-            if(response.status !== 200) {
-                throw new Error(response.statusText);
-            }
+            // if(response.status !== 200) {
+            //     throw new Error(response.statusText);
+            // }
+         
 
+
+            this.validateResponse(response);
             const post = await response.json();
             return post;
         
         
     }catch (error) {
-        console.error(error);
+        console.error(`Error fetching post with ID ${id}:`, error.message);
     }
 }
 
 async create(post){
     try{
-        const response = await fetch(this.getFullUrl('/posts'), {
+
+
+      if (!post) throw new Error("Post data is required.");
+
+        const response = await fetch(`${this.baseUrl}/posts`, {
             method: 'POST',
             body: JSON.stringify(post),
             headers: {
+                ...this.getAuthHeaders(),
                 'Content-Type': 'application/json',
             }
         });
 
+
+      this.validateResponse(response);
+
         const result = await response.json();
         return result;
     }catch (error){
-        console.error(error);
+        console.error("Error creating post:", error.message);
     }
 }
 
 
 async update(id,post){
     try{
-        const response = await fetch(this.getFullUrl(`/posts/${id}`), {
+
+
+      if (!id) throw new Error("Post ID is required.");
+      if (!post) throw new Error("Post data is required.");
+
+        const response = await fetch(`${this.baseUrl}/posts/${id}`, {
             method: 'PUT',
             body: JSON.stringify(post),
             headers: {
+                ...this.getAuthHeaders(),
                 'Content-Type': 'application/json',
             }
             });
 
+
+            this.validateResponse(response);
+
             const result = await response.json();
             return result;
     }catch (error){
-        console.error(error);
+        console.error(`Error updating post with ID ${id}:`,error.message);
     }
 }
 
 
 async delete(id){
     try{
-        const response = await fetch(this.getFullUrl(`/posts/${id}`), {
+
+
+      if (!id) throw new Error("Post ID is required.");
+
+        const response = await fetch(this.baseUrl`/posts/${id}`, {
             method: 'DELETE',
+            headers: this.getAuthHeaders(),
             });
+
+
+      this.validateResponse(response);
 
             return response;
     }catch(error){
-        console.error(error);
+        console.error(`Error deleting post with ID ${id}:`,error.message);
     }
 
 }
@@ -97,4 +136,15 @@ async delete(id){
 getFullUrl(endpoint){
     return `${this.baseUrl}${endpoint}`;
 }
+
+getAuthHeaders() {
+    const token = Storage.getItem("token");
+    if (!token) {
+      throw new Error("Authentication token is missing. Please log in again.");
+    }
+
+    return {
+      Authorization: `Bearer ${token}`,
+    };
+  }
 }

@@ -1,3 +1,5 @@
+//import {Base_Url}  from  "./const.js";       
+
 export class Storage {
     static getItem(key) {
       try {
@@ -5,7 +7,9 @@ export class Storage {
         if (value) {
           return JSON.parse(value);
         }
+        return null;  
       } catch (error) {
+        console.error('Error getting item from storage:', error);
         return null;
       }
     }
@@ -15,6 +19,7 @@ export class Storage {
   
         return true;
       } catch (error) {
+        console.error('Error setting item in storage:', error);
         return false;
       }
     }
@@ -25,6 +30,7 @@ export class Storage {
   
         return true;
       } catch (error) {
+        console.error('Error removing item from storage:', error);
         return false;
       }
     }
@@ -35,7 +41,14 @@ export class Storage {
   
         return true;
       } catch (error) {
+        console.error('Error clearing storage:', error);
         return false;
       }
     }
   }
+
+
+//   if (localStorage && !localStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+//     console.log('Live reload enabled.');
+//     localStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+// }

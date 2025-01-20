@@ -1,3 +1,4 @@
+import UI from "./utils.js";
 import {api} from "./apis/api.js"
 
 function createRegisterationContainer() {
@@ -26,7 +27,7 @@ function createRegisterationContainer() {
         console.log(result);
 
         if(result.id) {
-            window.location.assign('registration.html');
+            window.location.assign('home.html');
         }else{
             alert("Registration failed");
         }
@@ -42,8 +43,8 @@ function createRegisterationContainer() {
            
         
         UI.createElement('form', { class: 'formBox_container w-400px h-400px d-flex ai-center fd-column ta-center relative' }, [
-            UI.createElement('input', { id: 'firstName', type: 'text', placeholder: 'First Name', class: 'formBox_container_input w-300px h-40px' }),
-            UI.createElement('input', { id: 'lastName', type: 'text', placeholder: 'Last Name', class: 'formBox_container_input  w-300px h-40px' }),
+            UI.createElement('input', { id: 'firstname', type: 'text', placeholder: 'First Name', class: 'formBox_container_input w-300px h-40px' }),
+            UI.createElement('input', { id: 'lastname', type: 'text', placeholder: 'Last Name', class: 'formBox_container_input  w-300px h-40px' }),
             
             UI.createElement('input', { id: 'username', type: 'text', placeholder: 'Username', class: 'formBox_container_input w-300px h-40px' }),
             UI.createElement('input', { id: 'email', placeholder: 'Email', class: 'formBox_container_input  w-300px h-40px' }),
