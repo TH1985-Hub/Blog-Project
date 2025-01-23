@@ -64,8 +64,8 @@ function createContainer() {
     UI.createElement('main', { class: 'main-container d-flex jc-space-centre at-centre fd-column' },[
     UI.createElement('div', { class: 'login-container d-flex ai-center jc-center' }, [
       UI.createElement('form', { id: 'loginform', class: 'form_box w-300px h-300px d-flex jc-space-center fd-column ai-center' }, [
-        UI.createElement('input', { id: "email", type: 'email', placeholder: 'Email', class: 'form_box_email w-200px h-40px' }),
-        UI.createElement('input', { id: "password", type: 'password', placeholder: 'Password', class: 'form_box_password w-200px h-40px' }),
+        UI.createElement('input', { id: "email", type: 'email', placeholder: 'Email', class: 'form_box_email w-200px h-40px',autocomplete: "email" }),
+        UI.createElement('input', { id: "password", type: 'password', placeholder: 'Password', class: 'form_box_password w-200px h-40px', autocomplete: 'current-password' }),
         UI.createElement('button', { type: 'submit', class: 'form_box_login w-100px h-40px transition-5' }, 'Login'),
       ]),
       ]),

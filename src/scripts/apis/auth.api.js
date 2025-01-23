@@ -42,7 +42,7 @@ export class AuthApi extends BaseApi{
           throw new Error("Please fill in both email and password.");
         }
            
-    console.log("Sending login request to:", `${this.baseUrl}/auth/login`);
+    console.log("Sending login request to:" `${this.baseUrl}/auth/login`);
     console.log("With credentials:", credentials);
         // console.log("Sending login credentials:", credentials);
   
