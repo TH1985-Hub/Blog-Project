@@ -23,6 +23,6 @@ export class Api{
   
 }
 
-export const api = new Api('baseUrl');
+export const api = new Api('base');
 
 

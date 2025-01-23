@@ -27,17 +27,18 @@ const handleLogin = async (event) => {
     loginButton.textContent = "Logging in...";
     loginButton.disabled = true;
 
-    //console.log("Attempting login with credentials:", credentials);
+    console.log("Attempting login with credentials:", credentials);
 
     const result = await api.auth.login(credentials);
-
+     
+    console.log("Login response:", result);
     if (result?.accessToken && result?.user) {
      
-      Storage.set('token', result.accessToken);
-      Storage.set('user', result.user);
+      Storage.setItem('token', result.accessToken);
+      Storage.setItem('user', result.user);
 
       
-      //console.log("Login successful");
+      console.log("Login successful. User data:", result.user);
 
      
       window.location.assign("home.html");

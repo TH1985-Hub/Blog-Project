@@ -2,7 +2,7 @@ import {PostApi} from "./post.api.js";
 import {UserApi} from "./user.api.js" ;
 import {AuthApi}  from "./auth.api.js";
 import { FileUpload } from "./file-upload.api.js";
-import {baseUrl}     from "../apis/const.js";
+import {Base_Url}     from "./const.js";
 
 //export const baseUrl = "https://simple-blog-api-red.vercel.app/api";                                                 
 
@@ -10,19 +10,18 @@ export class Api{
     post = null;
     user = null;
     auth = null;
-    fileUpload = null
+    upload = null
 
     
   constructor(baseUrl) {
-      this.post = new PostApi(baseUrl);
+      this.post = new PostApi(base_Url);
       this.user = new UserApi(baseUrl);
       this.auth = new AuthApi(baseUrl);
       this.fileUpload = new FileUpload(baseUrl);
-
   }
   
 }
 
-export const api = new Api('baseUrl');
+export const api = new Api('Base_Url');
 
 

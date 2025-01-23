@@ -1,0 +1,1 @@
+export const baseUr = ('https://simple-blog-api-red.vercel.app/api');

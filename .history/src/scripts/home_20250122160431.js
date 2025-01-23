@@ -2,7 +2,7 @@
 
 import { UI } from "./utils.js";
 import { api }  from "./apis/api.js";
-import { baseUrl}    from "./apis/const.js";
+import { Base_Url }    from "./apis/const.js";
 import { isUserLogin } from './utils/is-user-login.js';
 
 const state = {

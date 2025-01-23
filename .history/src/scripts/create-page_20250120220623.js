@@ -1,6 +1,6 @@
 import UI from "./utils.js";
 import { api } from './apis/api.js';
-import { Storage } from  "./utils/storage.js";
+import { Storage } from "./utils/storage.js";
 import { isUserLogin } from "./utils/is-user-login.js";
 
 

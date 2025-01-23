@@ -1,7 +1,7 @@
 
 import { Storage } from     "../utils/storage.js";
 import { BaseApi } from     "./base.js";
-import {Base_Url}   from    "./const.js";
+import {baseUrl}   from    "./const.js";
 
 export class PostApi extends BaseApi{
     constructor(baseUrl){
