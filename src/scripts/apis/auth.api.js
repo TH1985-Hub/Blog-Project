@@ -44,7 +44,7 @@ export class AuthApi extends BaseApi{
            
     console.log("Sending login request to:" `${this.baseUrl}/auth/login`);
     console.log("With credentials:", credentials);
-        // console.log("Sending login credentials:", credentials);
+       //console.log("Sending login credentials:", credentials);
   
         const response = await fetch(`${this.baseUrl}/auth/login`, {
           method: 'POST',
@@ -52,6 +52,8 @@ export class AuthApi extends BaseApi{
           headers: {
             'Content-Type': 'application/json',
           },
+
+        body: JSON.stringify(credentials),
         });
 
 
@@ -59,7 +61,7 @@ export class AuthApi extends BaseApi{
     console.log("Login response headers:", response.headers);
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData = await response.text();
       console.error("API Error Response:", errorData);
       throw new Error(errorData.message || `Request failed with status ${response.status}`);
     }
@@ -72,13 +74,13 @@ export class AuthApi extends BaseApi{
         // }
   
         
-        // const data =  await response.json();
-        // console.log("Login successful:", data);
+         const data =  await response.json();
+         console.log("Login successful:", data);
 
-        // return data;
+         return data;
 
-        this.validateResponse(response); 
-        return await response.json();
+        //this.validateResponse(response); 
+        //return await response.json();
       } catch (error) {
         console.error('Login error:', error.message);
         throw error; 
