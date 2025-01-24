@@ -211,8 +211,7 @@ function renderContainer() {
   // }
 
   async function init() {
-    renderContainer();
-    renderBloggers();
+
     redirectToLoginIfNotLoggedIn();
     await fetchPosts();
     await fetchBloggers();
