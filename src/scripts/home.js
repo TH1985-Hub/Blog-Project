@@ -7,45 +7,45 @@ import { isUserLogin } from './utils/is-user-login.js';
 
 const state = {
   posts: [
-    {
-              id: 1,
-              title: "The Adventures of Alice in Wonderland",
-              story: "Alice was beginning to get very tired of sitting by her sister on the bank and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations.",
-              authorName: "Lewis Carroll",
-              img: "https://ik.imagekit.io/panmac/tr:f-auto,w-740,pr-true//bcd02f72-b50c-0179-8b4b-5e44f5340bd4/84f9dc39-0868-4cec-aeaa-2356387f37ce/Alice%E2%80%99s%20Adventures%20in%20Wonderland%20-%20Header.png",
-          },
-          {
-              id: 2,
-              title: "The Lord of the Rings: The Fellowship of the Ring",
-              story: "One ring to rule them all, one ring to find them,  one ring to bring them all and in the darkness bind them, in the Land of Mordor where the Shadows lie.",
-              authorName: "J.R.R. Tolkien",
-              img: "https://img.hulu.com/user/v3/artwork/3c4e0a9f-c6f2-44f4-a703-a18c6be2a937?base_image_bucket_name=image_manager&base_image=243fcf14-8e45-4441-96a8-be510660958a&size=600x338&format=webp",
-          },
-          {
-              id: 3,
-              title: "Pride and Prejudice",
-              story: "It is a truth universally acknowledged,  that a single man in possession of a good fortune must be in want of a wife.",
-              authorName: "Jane Austen",
-              img: "./src/images/image3.png",
-          },
-          {
-              id: 4,
-              title: "Oliver Twist",
-              story: "Oliver Twist was born in a workhouse, and his early life was one of hardship and struggle.",
-              authorName: "Charles Dickens",
-              img: "./src/images/image4.png",
-          }
+    //{
+          //     id: 1,
+          //     title: "The Adventures of Alice in Wonderland",
+          //     story: "Alice was beginning to get very tired of sitting by her sister on the bank and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations.",
+          //     authorName: "Lewis Carroll",
+          //     img: "https://ik.imagekit.io/panmac/tr:f-auto,w-740,pr-true//bcd02f72-b50c-0179-8b4b-5e44f5340bd4/84f9dc39-0868-4cec-aeaa-2356387f37ce/Alice%E2%80%99s%20Adventures%20in%20Wonderland%20-%20Header.png",
+          // },
+          // {
+          //     id: 2,
+          //     title: "The Lord of the Rings: The Fellowship of the Ring",
+          //     story: "One ring to rule them all, one ring to find them,  one ring to bring them all and in the darkness bind them, in the Land of Mordor where the Shadows lie.",
+          //     authorName: "J.R.R. Tolkien",
+          //     img: "https://img.hulu.com/user/v3/artwork/3c4e0a9f-c6f2-44f4-a703-a18c6be2a937?base_image_bucket_name=image_manager&base_image=243fcf14-8e45-4441-96a8-be510660958a&size=600x338&format=webp",
+          // },
+          // {
+          //     id: 3,
+          //     title: "Pride and Prejudice",
+          //     story: "It is a truth universally acknowledged,  that a single man in possession of a good fortune must be in want of a wife.",
+          //     authorName: "Jane Austen",
+          //     img: "./src/images/image3.png",
+          // },
+          // {
+          //     id: 4,
+          //     title: "Oliver Twist",
+          //     story: "Oliver Twist was born in a workhouse, and his early life was one of hardship and struggle.",
+          //     authorName: "Charles Dickens",
+          //     img: "./src/images/image4.png",
+          // }
   ],
 };
 
 
 const bloggers = [
-  { id: 1, firstName: "Sophie", lastName: "Robinson" },
-  { id: 2, firstName: "Adam", lastName: "Gallagher" },
-  { id: 3, firstName: "Tash", lastName: "Sefton" },
-  { id: 4, firstName: "Blake", lastName: "Scott" },
-  { id: 5, firstName: "Julia", lastName: "Engel" },
-  { id: 6, firstName: "Olivia", lastName: "Palermo" },
+//   { id: 1, firstName: "Sophie", lastName: "Robinson" },
+//   { id: 2, firstName: "Adam", lastName: "Gallagher" },
+//   { id: 3, firstName: "Tash", lastName: "Sefton" },
+//   { id: 4, firstName: "Blake", lastName: "Scott" },
+//   { id: 5, firstName: "Julia", lastName: "Engel" },
+//   { id: 6, firstName: "Olivia", lastName: "Palermo" },
 ];
 
 // const footerData = {
@@ -57,6 +57,16 @@ const bloggers = [
 //   },
 // };
 
+async function fetchPosts() {
+  try {
+    const response = await fetch(`${baseUrl}/posts`);
+    const data = await response.json();
+    state.posts = data;
+    renderPosts();
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+  }
+}
 
 function getRandomAvatar() {
   const avatars = [
@@ -72,20 +82,36 @@ function getRandomAvatar() {
 
 function redirectToLoginIfNotLoggedIn() {
   if (!isUserLogin()) {
-    window.location.assign ("home.html");
+    window.location.assign ("index.html");
   }
 }
 
-function handleDelete(postId) {
-  state.posts = state.posts.filter((post) => post.id !== postId);
-  renderPosts();
+// function handleDelete(postId) {
+//   state.posts = state.posts.filter((post) => post.id !== postId);
+//   renderPosts();
+// }
+
+// function handleEdit(postId) {
+//   const queryParams = new URLSearchParams({ id: postId });
+//   window.location.href = `create-page.html?${queryParams.toString()}`;
+// }
+
+async function handleDelete(postId) {
+  try {
+    await api.post.delete(postId);
+    state.posts = state.posts.filter((post) => post.id !== postId);
+    renderPosts();
+    console.log(`Post with ID: ${postId} deleted`); // Debug log
+  } catch (error) {
+    console.error(`Error deleting post with ID: ${postId}`, error);
+  }
 }
 
 function handleEdit(postId) {
+  console.log(`Editing post with ID: ${postId}`); // Debug log
   const queryParams = new URLSearchParams({ id: postId });
   window.location.href = `create-page.html?${queryParams.toString()}`;
 }
-
 
 function renderPosts() {
   const postsContainer = document.querySelector('.section_block_posts');
@@ -109,9 +135,17 @@ function renderPosts() {
       ]),
     ]);
 
+    
     postsContainer.appendChild(postElement);
+
+    postElement.querySelector('.btn-edit').addEventListener('click', () => handleEdit(post.id));
+    postElement.querySelector('.btn-delete').addEventListener('click', () => handleDelete(post.id));
   });
 }
+
+
+
+
 
 function renderBloggers() {
   const bloggersContainer = document.querySelector('.bloggers_list');
@@ -141,7 +175,7 @@ function renderContainer() {
       ]),
     ]),
     UI.createElement('main', { class: 'main-container w-90 h-80 d-flex jc-space-between' }, [
-      UI.createElement('div', { class: 'sidebar w-400px h-auto d-flex fd-column' }, [
+      UI.createElement('div', { class: 'sidebar w-400px h-auto d-flex fd-column overflow' }, [
         UI.createElement('h2', { class: 'sidebar_title' }, 'Bloggers'),
         UI.createElement('div', { class: 'bloggers_list w-90 h-80 d-flex fd-column' }),
       ]),
@@ -149,7 +183,7 @@ function renderContainer() {
         UI.createElement('div', { class: 'create-new-post-btn-container' }, [
           UI.createElement('button', { class: 'create-new-post-btn', onclick: () => window.location.assign('create-page.html') }, 'Create New Post'),
         ]),
-        UI.createElement('div', { class: 'section_block w-100 h-90' }, [
+        UI.createElement('div', { class: 'section_block w-100 h-90 d-flex fd-column overflow' }, [
           UI.createElement('div', { class: 'section_block_posts w-90 h-100 d-flex fd-column' }),
         ]),
       ]),
@@ -169,12 +203,20 @@ function renderContainer() {
 }
 
 
-function init() {
-  redirectToLoginIfNotLoggedIn();
-  renderContainer();
-  renderBloggers();
-  renderPosts();
-}
+  // function init() {
+  // redirectToLoginIfNotLoggedIn();
+  // renderContainer();
+  // renderBloggers();
+  // renderPosts();
+  // }
 
-init();
-
+  async function init() {
+    redirectToLoginIfNotLoggedIn();
+    await fetchPosts();
+    await fetchBloggers();
+  }
+  
+  init();
+  
+  
+  
