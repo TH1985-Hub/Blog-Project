@@ -18,31 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loginHandler(event) {
   event.preventDefault();
-
-
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
-
-  if (!email || !password) {
-    alert('Please enter both email and password.');
-    return;
-  }
-
-  const credentials = { email, password };
-
-  try {
-    const response = await api.auth.login(credentials);
-
-    if (response.id) {
-      // Assuming response.id indicates a successful login
-      window.location.assign('home.html');
-    } else {
-      alert("Login failed. Please check your credentials.");
-    }
-  } catch (error) {
-    console.error("Login error:", error.message);
-    alert(`Login failed: ${error.message}`);
-  
 //   const inputEmail = document.querySelector("#email");
 //   const inputPassword = document.querySelector("#password");
 
@@ -89,7 +64,6 @@ async function loginHandler(event) {
 //     loginButton.textContent = "Login";
 //     loginButton.disabled = false;
 //   }
-  }
 };
 
 const createContainer =()  =>{
