@@ -6,18 +6,8 @@ import { UI } from "./utils.js";
 import {api } from "./apis/api.js";
 import { Storage } from "./utils/storage.js";
 
-// const handleLogin = async (event) => {
-//   event.preventDefault(); 
-
-document.addEventListener('DOMContentLoaded', () => {
-  const loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', loginHandler);
-  }
-});
-
-async function loginHandler(event) {
-  event.preventDefault();
+const handleLogin = async (event) => {
+  event.preventDefault(); 
   const inputEmail = document.querySelector("#email");
   const inputPassword = document.querySelector("#password");
 
@@ -45,7 +35,7 @@ async function loginHandler(event) {
     if (result?.accessToken && result?.user) {
      
       Storage.getItemetItem('token', result.accessToken);
-      Storage.getItem('user', result.user);
+      Storage.setItem('user', result.user);
 
       
       console.log("Login successful. User data:", result.user);

@@ -8,16 +8,6 @@ import { Storage } from "./utils/storage.js";
 
 // const handleLogin = async (event) => {
 //   event.preventDefault(); 
-
-document.addEventListener('DOMContentLoaded', () => {
-  const loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', loginHandler);
-  }
-});
-
-async function loginHandler(event) {
-  event.preventDefault();
   const inputEmail = document.querySelector("#email");
   const inputPassword = document.querySelector("#password");
 

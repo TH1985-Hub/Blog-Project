@@ -53,12 +53,12 @@ export class AuthApi extends BaseApi{
             'Content-Type': 'application/json',
           },
 
-       // body: JSON.stringify(credentials),
+        body: JSON.stringify(credentials),
         });
 
 
-    // console.log("Login response status:", response.status);
-    // console.log("Login response headers:", response.headers);
+    console.log("Login response status:", response.status);
+    console.log("Login response headers:", response.headers);
 
     if (!response.ok) {
       const errorData = await response.text();
@@ -74,13 +74,13 @@ export class AuthApi extends BaseApi{
         // }
   
         
-        //  const data =  await response.json();
-        //  console.log("Login successful:", data);
+         const data =  await response.json();
+         console.log("Login successful:", data);
 
-        //  return data;
+         return data;
 
         //this.validateResponse(response); 
-        return await response.json();
+        //return await response.json();
       } catch (error) {
         console.error('Login error:', error.message);
         throw error; 

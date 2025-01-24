@@ -6,18 +6,8 @@ import { UI } from "./utils.js";
 import {api } from "./apis/api.js";
 import { Storage } from "./utils/storage.js";
 
-// const handleLogin = async (event) => {
-//   event.preventDefault(); 
-
-document.addEventListener('DOMContentLoaded', () => {
-  const loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', loginHandler);
-  }
-});
-
-async function loginHandler(event) {
-  event.preventDefault();
+const handleLogin = async (event) => {
+  event.preventDefault(); 
   const inputEmail = document.querySelector("#email");
   const inputPassword = document.querySelector("#password");
 
