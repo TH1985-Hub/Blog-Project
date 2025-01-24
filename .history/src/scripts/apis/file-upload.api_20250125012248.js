@@ -1,7 +1,7 @@
 
 
 
-import { Storage } from './utils/storage.js';
+import { Storage } from '../utils/storage.js';
 import { baseUrl } from './const.js';
 import    {api}    from "./apis/api.js";
 
