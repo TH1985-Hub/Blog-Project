@@ -82,9 +82,7 @@ export class FileUpload {
 
       const response = await fetch(this.getFullUrl(`/posts/${id}`), {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      
       });
 
       

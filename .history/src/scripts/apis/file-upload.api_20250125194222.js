@@ -54,8 +54,7 @@ export class FileUpload {
         method: "PUT",
         body: JSON.stringify(post),
         headers: {
-          Authorization: `Bearer ${token}`,
-        
+          ...this.getAuthHeaders(),
           "Content-Type": "application/json",
         },
       });
@@ -82,9 +81,7 @@ export class FileUpload {
 
       const response = await fetch(this.getFullUrl(`/posts/${id}`), {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: this.getAuthHeaders(),
       });
 
       
