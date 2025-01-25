@@ -177,7 +177,7 @@
 
 import { UI } from "./utils.js";
 import { api } from "./apis/api.js";
-//import { Storage } from "../utils/storage.js";  // Ensure the path is correct
+import { Storage } from "./utils/storage.js";  // Ensure the path is correct
 
 // Define loginHandler function
 async function loginHandler(event) {
