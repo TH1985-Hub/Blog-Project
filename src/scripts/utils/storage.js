@@ -4,10 +4,11 @@ export class Storage {
     static getItem(key) {
       try {
         const value = localStorage.getItem(key);
-        if (value) {
-          return JSON.parse(value);
-        }
-        return null;  
+        // if (value) {
+        //   return JSON.parse(value);
+        // }
+        // return null; 
+        return value ? JSON.parse(value) : null; 
       } catch (error) {
         console.error('Error getting item from storage:', error);
         return null;
@@ -24,7 +25,7 @@ export class Storage {
       }
     }
   
-    static remove(key) {
+    static removeItem(key) {
       try {
         localStorage.removeItem(key);
   

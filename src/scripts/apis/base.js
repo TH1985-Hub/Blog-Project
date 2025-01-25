@@ -13,7 +13,7 @@ export class BaseApi {
       }
   
       if (response.status === 500) {
-        alert("Server error! Please try again later.");
+        alert ("Server error! Please try again later.");
         throw new Error("500 Internal Server Error");
       }
   
