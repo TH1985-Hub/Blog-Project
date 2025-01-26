@@ -6,12 +6,12 @@ import { BaseApi } from     "./base.js";
 export class PostApi extends BaseApi{
     constructor(baseURL){
         super();
-        this.baseURL = baseURL;
+        this.baseUrl = baseUrl;
     }
 
     async getposts(){
         try {
-            const response = await fetch(`${this.baseURL}/posts`,{
+            const response = await fetch(`${this.baseUrl}/posts`,{
                 headers: this.getAuthHeaders(),
  
             });
@@ -95,7 +95,7 @@ async update(id,post){
       if (!id) throw new Error("Post ID is required.");
       if (!post) throw new Error("Post data is required.");
 
-        const response = await fetch(`${this.baseURL}/posts/${id}`, {
+        const response = await fetch(`${this.baseUrl}/posts/${id}`, {
             method: 'PUT',
             body: JSON.stringify(post),
             headers: {

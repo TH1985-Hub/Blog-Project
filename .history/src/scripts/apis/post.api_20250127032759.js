@@ -95,7 +95,7 @@ async update(id,post){
       if (!id) throw new Error("Post ID is required.");
       if (!post) throw new Error("Post data is required.");
 
-        const response = await fetch(`${this.baseURL}/posts/${id}`, {
+        const response = await fetch(`${this.baseU}/posts/${id}`, {
             method: 'PUT',
             body: JSON.stringify(post),
             headers: {

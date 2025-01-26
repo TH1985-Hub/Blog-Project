@@ -3,7 +3,7 @@
 
 import { Storage } from '../utils/storage.js';
 import { baseURL} from './const.js';
-import    {api}    from "./apis/api.js";
+import    {api}    from "./apisapi.js";
 
 export class FileUpload {
   constructor(baseURL) {
