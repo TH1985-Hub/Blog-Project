@@ -242,7 +242,7 @@
 // });
 
 import { UI } from "./utils.js";
-//import { baseURL }  from "./apis/const.js";
+import { baseURL } from "./apis/const.js";
 import { api } from "./apis/api.js";
 //import { Storage } from "../utils/storage.js";  // Ensure the path is correct
 
@@ -276,12 +276,12 @@ async function loginHandler(event) {
     }
   } catch (error) {
     console.error("Login error:", error.message);
-    alert (`Login failed: ${error.message}`);
+    alert `Login failed: ${error.message}`);
   }
 }
 
 const createContainer = () => {
-  const container = UI.createElement('div', { class: 'container w-100 d-flex jc-space-between fd-column ai-center' }, [
+  const container = UI.createElement('div', { class: 'container w-100 d-flex jc-space-between fd-column ai-center' }, 
     UI.createElement('header', { class: 'header w-90 h-100px d-flex ai-center jc-space-between' }, [
       UI.createElement('a', { href: 'home.html', class: 'nav_list td-none transition-5' }, 'Home'),
     ]),
@@ -294,7 +294,7 @@ const createContainer = () => {
         ]),
       ]),
     ]),
-]);
+);
 
   UI.render(container, 'body');
 
