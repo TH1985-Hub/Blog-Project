@@ -226,7 +226,7 @@
   
 import { UI } from "./utils.js";
 import { api } from "./apis/api.js";
-import { baseURL } from "./apis/const.js";
+import { baseU } from "./apis/const.js";
 import { isUserLogin } from './utils/is-user-login.js';
 import footerData from "./data.js";
 

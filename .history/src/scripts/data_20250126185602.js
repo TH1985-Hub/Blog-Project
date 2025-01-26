@@ -8,7 +8,7 @@
     }
   };
 
-  footerData;
+  export default footerData;
 
 
 

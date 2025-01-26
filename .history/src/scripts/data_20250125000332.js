@@ -1,5 +1,5 @@
 
- export const footerData = {
+  const footerData = {
     email: 'htatevik382@gmail.com',
     number: '+37493675097',
     socialMedia: {
@@ -8,7 +8,7 @@
     }
   };
 
-  footerData;
+  export default footerData;
 
 
 
