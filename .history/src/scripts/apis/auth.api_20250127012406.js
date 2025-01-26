@@ -46,7 +46,7 @@ export class AuthApi extends BaseApi{
    // console.log("With credentials:", credentials);
        //console.log("Sending login credentials:", credentials);
   
-        const response = await fetch(`${this.baseURL}/auth/login`, {
+        const responsedate = await fetch(`${this.baseURL}/auth/login`, {
           method: 'POST',
           body: JSON.stringify(credentials),
           headers: {
@@ -81,22 +81,13 @@ export class AuthApi extends BaseApi{
 
 
     const responseData = await response.json();
-    console.log('Login Response Data:',  { status: responseData.status, message: response});
+    console.log('Login Response Data:', responseData);
   
-    if (responseData && responseData.accessToken && responseData.user) {
-      Storage.setItem('token', responseData.accessToken);
-      Storage.setItem('user', JSON.stringify(responseData.user));
-      window.location.assign('home.html');
-    } else {
-      alert("Login failed. Please check your credentials.");
-    }
 
         this.validateResponse(response); 
-       // return await response.json();
-       return responseData;
+        return await response.json();
       } catch (error) {
         console.error('Login error:', error);
-        alert(`Login failed: ${error.message}`);
         throw error; 
       }
     }

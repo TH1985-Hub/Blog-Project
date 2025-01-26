@@ -96,7 +96,7 @@ export class AuthApi extends BaseApi{
        return responseData;
       } catch (error) {
         console.error('Login error:', error);
-        alert(`Login failed: ${error.message}`);
+        
         throw error; 
       }
     }

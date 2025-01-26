@@ -262,7 +262,7 @@ async function loginHandler(event) {
   //console.log('Credentials:', credentials);
 
   console.log('Logging in with email:', credentials.email);
-  console.log('Login Response Data:', { status: responseData.status, message: response});
+  console.log('Login Response Data:', { status: responseData.status, message: response);
   try {
     const response = await api.auth.login(credentials);
     console.log('API Response:', response);

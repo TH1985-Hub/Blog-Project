@@ -378,28 +378,6 @@ function renderContainer() {
   UI.render(container, 'body');
 }
 
-function safeRedirect(url) {
-  const allowedUrls = ["home.html", "index.html", "create-page.html"];
-  if (allowedUrls.includes(url)) {
-    window.location.assign(url);
-  } else {
-    console.error("Unsafe URL redirection attempted:", url);
-  }
-}
-
-function redirectToLoginIfNotLoggedIn() {
-  if (!isUserLogin()) {
-    console.log('User not logged in, redirecting to login page...');
-    safeRedirect("index.html");
-  }
-}
-
-function handleEdit(postId) {
-  console.log(`Editing post with ID: ${postId}`);
-  const queryParams = new URLSearchParams({ id: postId });
-  safeRedirect(`create-page.html?${queryParams.toString()}`);
-}     
-
 async function init() {
   console.log('Initializing...');
   renderContainer();

@@ -81,22 +81,13 @@ export class AuthApi extends BaseApi{
 
 
     const responseData = await response.json();
-    console.log('Login Response Data:',  { status: responseData.status, message: response});
+    console.log('Login Response Data:',  { status: responseData.status, messa);
   
-    if (responseData && responseData.accessToken && responseData.user) {
-      Storage.setItem('token', responseData.accessToken);
-      Storage.setItem('user', JSON.stringify(responseData.user));
-      window.location.assign('home.html');
-    } else {
-      alert("Login failed. Please check your credentials.");
-    }
 
         this.validateResponse(response); 
-       // return await response.json();
-       return responseData;
+        return await response.json();
       } catch (error) {
         console.error('Login error:', error);
-        alert(`Login failed: ${error.message}`);
         throw error; 
       }
     }

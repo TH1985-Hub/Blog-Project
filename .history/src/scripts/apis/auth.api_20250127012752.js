@@ -93,10 +93,9 @@ export class AuthApi extends BaseApi{
 
         this.validateResponse(response); 
        // return await response.json();
-       return responseData;
+       retu
       } catch (error) {
         console.error('Login error:', error);
-        alert(`Login failed: ${error.message}`);
         throw error; 
       }
     }
