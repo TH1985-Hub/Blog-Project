@@ -265,7 +265,7 @@ async function loginHandler(event) {
 
   try {
     const response = await api.auth.login(credentials);
-    console.log('API Response:', {status: response.statuse, message:response});
+    console.log('API Response:', {statusresponse);
 
     if (response && response.accessToken && response.user) {
       // Assuming response.accessToken indicates a successful login
