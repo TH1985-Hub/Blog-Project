@@ -1,6 +1,6 @@
 
 import  {BaseApi}  from './base.js';
-//import  {baseURL}  from "./const.js";
+import  {baseURL}  from "./const.js";
 
 
 export class AuthApi extends BaseApi{
