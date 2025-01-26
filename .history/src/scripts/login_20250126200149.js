@@ -268,7 +268,7 @@ async function loginHandler(event) {
     if (response && response.accessToken && response.user) {
       // Assuming response.accessToken indicates a successful login
       Storage.setItem('token', response.accessToken);
-      Storage.setItem('user', JSON.stringify(response.user));
+      Storage.setItem('user', response.user);
 
       window.location.assign('home.html');
     } else {
@@ -281,7 +281,7 @@ async function loginHandler(event) {
 }
 
 const createContainer = () => {
-  const container = UI.createElement('div', { class: 'container w-100 d-flex jc-space-between fd-column ai-center' }, 
+  const container = UI.createElement('div', { class: 'container w-100 d-flex jc-space-between fd-column ai-center' }, [
     UI.createElement('header', { class: 'header w-90 h-100px d-flex ai-center jc-space-between' }, [
       UI.createElement('a', { href: 'home.html', class: 'nav_list td-none transition-5' }, 'Home'),
     ]),
@@ -294,7 +294,7 @@ const createContainer = () => {
         ]),
       ]),
     ]),
-);
+]);
 
   UI.render(container, 'body');
 

@@ -294,7 +294,7 @@ const createContainer = () => {
         ]),
       ]),
     ]),
-);
+]);
 
   UI.render(container, 'body');
 

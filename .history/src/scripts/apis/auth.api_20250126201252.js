@@ -79,10 +79,7 @@ export class AuthApi extends BaseApi{
 
         //  return data;
 
-
-    const responseData = await response.json();
-    console.log('Login Response Data:', responseData);
-  
+        
 
         this.validateResponse(response); 
         return await response.json();

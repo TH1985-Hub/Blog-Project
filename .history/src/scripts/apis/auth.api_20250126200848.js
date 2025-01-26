@@ -1,6 +1,6 @@
 
 import  {BaseApi}  from './base.js';
-import  {baseURL}  from "./apis/const.js";
+import  {baseURL}  from "./apisconst.js";
 
 
 export class AuthApi extends BaseApi{
@@ -78,11 +78,6 @@ export class AuthApi extends BaseApi{
         //  console.log("Login successful:", data);
 
         //  return data;
-
-
-    const responseData = await response.json();
-    console.log('Login Response Data:', responseData);
-  
 
         this.validateResponse(response); 
         return await response.json();
