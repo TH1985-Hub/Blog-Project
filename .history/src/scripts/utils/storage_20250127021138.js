@@ -14,7 +14,7 @@ export class Storage {
         return null;
       }
     }
-    static setItem(key, value) {
+    static setI(key, value) {
       try {
         localStorage.setItem(key, JSON.stringify(value));
   
