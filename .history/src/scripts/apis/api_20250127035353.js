@@ -1,4 +1,3 @@
-
 import {PostApi} from "./post.api.js";
 import {UserApi} from "./user.api.js" ;
 import {AuthApi}  from "./auth.api.js";
@@ -9,9 +8,9 @@ import {baseURL}     from "./const.js";
 
 export class Api{
      post = null;
-    user = null;
+    //user = null;
      auth = null;
-     fileUpload = null
+    // fileUpload = null
 
     
   constructor(baseURL) {
