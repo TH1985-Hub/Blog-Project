@@ -139,7 +139,7 @@ try {
   }
 } catch (error) {
   console.error(error);
-  alert (`There was an error ${id ? "updating" : "creating"} the post.`);
+  alert(`There was an error ${id ? "updating" : "creating"} the post.`);
 }
 }
 
@@ -162,7 +162,7 @@ if (searchParams.has("id")) {
   }
 }
 }
-
+}
       
       initApplicants();
       

@@ -1,6 +1,6 @@
 import UI from "./utils.js";
 import { api } from './apis/api.js';
-//import { baseURL}   from  "../apis/const.js";
+import { baseURL}   from  "../apis/const.js";
 import { isUserLogin } from "./utils/is-user-login.js";
 
 
@@ -139,7 +139,7 @@ try {
   }
 } catch (error) {
   console.error(error);
-  alert (`There was an error ${id ? "updating" : "creating"} the post.`);
+  alert(`There was an error ${id ? "updating" : "creating"} the post.`);
 }
 }
 
@@ -162,7 +162,7 @@ if (searchParams.has("id")) {
   }
 }
 }
-
+}
       
       initApplicants();
       

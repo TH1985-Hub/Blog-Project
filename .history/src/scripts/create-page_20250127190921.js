@@ -162,7 +162,7 @@ if (searchParams.has("id")) {
   }
 }
 }
-
+}
       
       initApplicants();
       
