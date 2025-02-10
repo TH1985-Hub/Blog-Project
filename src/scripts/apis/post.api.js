@@ -1,7 +1,7 @@
 
 import { Storage } from     "../utils/storage.js";
 import { BaseApi } from     "./base.js";
-//import {baseUrl}   from    "./const.js";
+//import {baseURL}   from    "./const.js";
 
 export class PostApi extends BaseApi{
     constructor(baseURL){
@@ -11,7 +11,7 @@ export class PostApi extends BaseApi{
 
     async getposts(){
         try {
-            const response = await fetch(`${this.baseURL}/posts`,{
+            const response = await fetch(`${this.baseURL}posts`,{
                 headers: this.getAuthHeaders(),
  
             });
@@ -40,7 +40,7 @@ export class PostApi extends BaseApi{
             }
 
 
-            const response = await fetch(`${this.baseUrl}/posts/${id}`,{
+            const response = await fetch(`${this.baseURL}posts/${id}`,{
                 headers: this.getAuthHeaders(),
             });
 
@@ -67,7 +67,7 @@ async create(post){
 
       if (!post) throw new Error("Post data is required.");
 
-        const response = await fetch(`${this.baseUrl}/posts`, {
+        const response = await fetch(`${this.baseURL}posts`, {
             method: 'POST',
             body: JSON.stringify(post),
             headers: {
@@ -95,7 +95,7 @@ async update(id,post){
       if (!id) throw new Error("Post ID is required.");
       if (!post) throw new Error("Post data is required.");
 
-        const response = await fetch(`${this.baseURL}/posts/${id}`, {
+        const response = await fetch(`${this.baseURL}posts/${id}`, {
             method: 'PUT',
             body: JSON.stringify(post),
             headers: {
@@ -122,7 +122,7 @@ async delete(id){
 
       if (!id) throw new Error("Post ID is required.");
 
-        const response = await fetch(this.baseUrl`/posts/${id}`, {
+        const response = await fetch(`{this.baseURL}posts/${id}`, {
             method: 'DELETE',
             headers: this.getAuthHeaders(),
             });
@@ -138,18 +138,21 @@ async delete(id){
 
 }
 
-getFullUrl(endpoint){
-    return `${this.baseUrl}${endpoint}`;
+getFullURL(endpoint){
+    return `${this.baseURL}${endpoint}`;
 }
 
 getAuthHeaders() {
-    const token = Storage.getItem("token");
-    if (!token) {
-      throw new Error("Authentication token is missing. Please log in again.");
-    }
+     const token = Storage.getItem("token");
+    // if (!token) {
+    //   throw new Error("Authentication token is missing. Please log in again.");
+    // }
 
-    return {
+    return token ? {
       Authorization: `Bearer ${token}`,
-    };
+    } : {};
   }
 }
+
+
+

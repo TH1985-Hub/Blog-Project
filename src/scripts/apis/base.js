@@ -1,6 +1,7 @@
 export class BaseApi {
     validateResponse(response) {
       if (response.status === 401) {
+        alert("Session expired. Please log in again.");
         window.location.assign('index.html') 
   
         return false
@@ -8,7 +9,7 @@ export class BaseApi {
 
     
        if (response.status === 400) {
-        alert("Bad request! Please check your input.");
+        alert ("Bad request! Please check your input.");
         throw new Error("400 Bad Request");
       }
   
@@ -26,3 +27,4 @@ export class BaseApi {
 
     }
   }
+

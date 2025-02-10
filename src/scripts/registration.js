@@ -1,24 +1,40 @@
 import UI from "./utils.js";
 import {api} from "./apis/api.js";
-import { baseUrl }  from "./apis/const.js";
+import { baseURL }  from "./apis/const.js";
 
 function createRegisterationContainer() {
     const submitButton = UI.createElement("button", {type: "submit", class: 'submit-btn w-100px h-30px'}, "Submit");
+    submitButton.disabled = false;
 
     const handleSubmit = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
+        submitButton.disabled = true;
+
 
         const firstname = document.getElementById('firstname').value.trim();
         const lastname = document.getElementById('lastname').value.trim();
-        const username = document.getElementById('email').value.trim();
+        const username = document.getElementById('username').value.trim();
         const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
+        const password = document.getElementById  ('password').value.trim();
        
 
         if (!firstname || !lastname || !username || !email || !password) {
             alert('Please fill out all fields.');
             return;
           }
+
+          const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+          if (!emailPattern.test(email)) {
+              alert("Please enter a valid email.");
+              return;
+          }
+  
+          
+          if (password.length < 6) {
+              alert("Password must be at least 6 characters long.");
+              return;
+          }
+  
 
 
         const user = {
@@ -44,8 +60,13 @@ function createRegisterationContainer() {
     } catch (error) {
         console.error("Registration Error:", error);
         alert("Registration failed. Please try again.");
+      }finally{
+         
+            submitButton.disabled = false;
+
       }
     };
+
 
     submitButton.addEventListener('click', handleSubmit);
 
@@ -63,7 +84,7 @@ function createRegisterationContainer() {
             UI.createElement('input', { id: 'username', type: 'text', placeholder: 'Username', class: 'formBox_container_input w-300px h-40px' }),
             UI.createElement('input', { id: 'email', placeholder: 'Email', class: 'formBox_container_input  w-300px h-40px' }),
             
-            UI.createElement('input', { id: 'password', type: 'text', placeholder: 'Password', class: 'formBox_container_input w-300px h-40px' }),
+            UI.createElement('input', { id: 'password', type: 'password', placeholder: 'Password', class: 'formBox_container_input w-300px h-40px' }),
             
            
           
@@ -73,10 +94,10 @@ function createRegisterationContainer() {
             //         UI.createElement('input', {type: 'checkbox', class: 'checkbox'}),'Send me email',
             //     ]),
                // UI.createElement('button', { type: 'submit', class: 'submit-btn w-100px h-30px' }, 'Submit') [
-                    submitButton
+                    submitButton,
 
                 
-            ])
+            ]),
         
         
 

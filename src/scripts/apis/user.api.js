@@ -2,7 +2,7 @@
 
 import { Storage } from   '../utils/storage.js';
 import { BaseApi } from     "./base.js";
-import {baseURL}   from     "./const.js";
+//import {baseURL}   from     "./const.js";
 
 
 
@@ -21,8 +21,8 @@ export class UserApi extends BaseApi{
             //     throw new Error(response.statusText);
             // }
             this.validateResponse(response);
-            const users = await response.json();
-            return users;
+            return await response.json();
+            //return users;
         }catch(error){
             console.error("Error fetching users:", error.message);
             throw error;
@@ -34,9 +34,17 @@ export class UserApi extends BaseApi{
         try {
           if (!id) throw new Error("User ID is required.");
     
-          const response = await fetch(`${this.getFullUrl}/users/${id}`, {
-            headers: this.getAuthHeaders(),
-          });
+          // const response = await fetch(`${this.getFullUrl}/users/${id}`, {
+          //   headers: this.getAuthHeaders(),
+          // });
+
+          const response = await fetch(this.getFullUrl(`/users/${id}`), { headers: this.getAuthHeaders() });
+          
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+      
     
           this.validateResponse(response);
     
@@ -53,14 +61,15 @@ export class UserApi extends BaseApi{
     }
     getAuthHeaders() {
         const token = Storage.getItem("token");
-        if (!token) {
-          throw new Error("Authentication token is missing. Please log in again.");
-        }
+        // if (!token) {
+        //   throw new Error("Authentication token is missing. Please log in again.");
+        // }
     
-        return {
+        return token ? {
           Authorization: `Bearer ${token}`,
-        };
+        } : {};
       }
 }
+
 
 

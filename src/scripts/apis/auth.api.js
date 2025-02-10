@@ -1,6 +1,8 @@
 
 import  {BaseApi}  from './base.js';
+//import {AuthApi} from './apis/api.js';
 import  {Storage}   from "../utils/storage.js";
+import { baseURL } from './const.js';
 
 
 export class AuthApi extends BaseApi{
@@ -12,7 +14,7 @@ export class AuthApi extends BaseApi{
     
     async register(user) {
       try {
-        const response = await fetch(`${this.baseURL}/auth/register`, {
+        const response = await fetch (`${this.baseURL}api/auth/register`, {
           method: 'POST',
           body: JSON.stringify(user),
           headers: {
@@ -35,72 +37,46 @@ export class AuthApi extends BaseApi{
       }
     }
   
-   
-    async login(credentials) {
-      try {
-        if (!credentials.email || !credentials.password) {
-          throw new Error("Please fill in both email and password.");
-        }
-           
-    //console.log("Sending login request to:" `${this.baseUrl}/auth/login`);
-   // console.log("With credentials:", credentials);
-       //console.log("Sending login credentials:", credentials);
-  
-        const response = await fetch(`${this.baseURL}/auth/login`, {
-          method: 'POST',
-          body: JSON.stringify(credentials),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-
-       // body: JSON.stringify(credentials),
-        });
 
 
-    // console.log("Login response status:", response.status);
-    // console.log("Login response headers:", response.headers);
+  async login(credentials) {
+    try {
 
-    // if (!response.ok) {
-    //   const errorData = await response.text();
-    //   console.error("API Error Response:", errorData);
-    //   throw new Error(errorData.message || `Request failed with status ${response.status}`);
-    // }
+      const { email, password } = credentials;
 
-  
-        
-        // if (!response.ok) {
-        //   const errorData = await response.json();
-        //   throw new Error(errorData.message || response.statusText); 
-        // }
-  
-        
-        //  const data =  await response.json();
-        //  console.log("Login successful:", data);
+      
+      console.log ('Attempting login with:', { email, password });
+      console.log('Endpoint:', `${this.baseURL}auth/login`);
 
-        //  return data;
+      //console.log("Request body:", JSON.stringify({ email, password }));
+      const response = await fetch(`${this.baseURL}api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-
-    const responseData = await response.json();
-    console.log('Login Response Data:',  { status: responseData.status, message: response});
-  
-    if (responseData && responseData.accessToken && responseData.user) {
-      Storage.setItem('token', responseData.accessToken);
-      Storage.setItem('user', JSON.stringify(responseData.user));
-      window.location.assign('home.html');
-    } else {
-      alert("Login failed. Please check your credentials.");
-    }
-
-        this.validateResponse(response); 
-       // return await response.json();
-       return responseData;
-      } catch (error) {
-        console.error('Login error:', error);
-        alert(`Login failed: ${error.message}`);
-        throw error; 
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Login failed: ${response.status}");
       }
+
+      const result = await response.json();
+      console.log("Api Response:", result);
+      // Storage.setItem("token", data.token);
+      // Storage.setItem("user", data.user);
+     if (result.token)   {
+      Storage.setItem("token", result.token);
+      Storage.setItem('user', JSON.stringify(result.user));
+     }
+     return result;
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
     }
   }
+}
 
 
 

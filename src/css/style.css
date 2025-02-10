@@ -15,8 +15,8 @@ html{
 .header{
     background-color: var(--primary-color);
     padding: var(--spacing-4);
-    margin-top: var(--margin-10);
-    margin:  var(--margin-40); 
+    /* margin-top: var(--margin-10); */
+    margin-left:  var(--margin-30); 
      
 }
 
@@ -36,14 +36,14 @@ html{
     margin-right: var(--margin-60);
     background-color: var(--bg-primary-color);
     padding: 0 var(--spacing-1);  
-    box-shadow: var(--box-shadow-1);
-    box-shadow: var(--box-shadow-4);  
+    /* box-shadow: var(--box-shadow-1);
+    box-shadow: var(--box-shadow-4);   */
 }
 
 
-.nav:hover{
+/* .nav:hover{
     transform: scale(1.1);
-}
+} */
 
 .form_box {
     box-shadow: var(--box-shadow-1);
@@ -91,6 +91,10 @@ html{
 .container-root{
    
     height: 1200px;
+}
+
+.main-container {
+    margin-bottom: var(--margin-80);
 }
 
 .login-container {
@@ -273,13 +277,14 @@ html{
 }
 
 h2{
-    font-size: var(--font-size-30);
+    font-size: var(--font-size-50);
     color: var(--color-white);
 }
 
 .section_block{
     background-color: var(--bg-primary-color);
-    box-shadow: var(--box-shadow-1);
+     box-shadow: var(--box-shadow-1); 
+    
    
 
 }
@@ -288,7 +293,7 @@ h2{
     padding: var(--spacing-4);
     margin: var(--margin-30) 0;
     background-color: var(--color-white);
-    box-shadow: var(--box-shadow-1);
+     box-shadow: var(--box-shadow-1); 
 }
 
 .blogger_avatar{
@@ -297,6 +302,13 @@ h2{
 
 .blogger_avatar:hover{
     transform: scale(1.1);
+}
+
+.bloggers_list {
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px
+
 }
 
 .post_image{
@@ -310,21 +322,25 @@ h2{
 
 
 .section_block_posts{
+    max-height: 700px; 
     padding: var(--spacing-3) 0;
+    overflow-y: auto;
 }
 
 .footer{
-    padding: var(--spacing-3);
+    padding: var(--spacing-2);
     color: var(--color-white);
     background-color: var(--primary-color);
     box-shadow: var(--box-shadow-1);
     margin-top: var(--margin-20);
+  
 }
 
 .socialMedia_icon{
+   
+    
     font-size: var(--font-size-25);
     color: var(--color-white);
-    margin-right: var(--margin-10);
 }
 
 .socialMedia_icon:hover{

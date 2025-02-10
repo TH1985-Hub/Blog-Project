@@ -1,1 +1,0 @@
-export const baseU = ('https://simple-blog-api-red.vercel.app');

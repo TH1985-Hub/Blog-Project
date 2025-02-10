@@ -18,15 +18,15 @@ export class FileUpload {
       const formData = new FormData();
       formData.append("file", file);
 
-      const token = Storage.getItem("token");
+      //const token = Storage.getItem("token");
+      const headers = this.getAuthHeaders();
 
-      const response = await fetch(this.getFullUrl("/file-upload/upload"), {
+
+      const response = await fetch(this.getFullURL("file-upload/upload"), {
         method: "POST",
         body: formData,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        //headers: this.getAuthHeaders(), 
+        headers,
+        
       });
 
       
@@ -49,14 +49,16 @@ export class FileUpload {
     try {
       if (!id) throw new Error("Post ID is required.");
       if (!post) throw new Error("Post data is required.");
-
-      const response = await fetch(this.getFullUrl(`/posts/${id}`), {
+      
+      const headers = this.getAuthHeaders();
+      const response = await fetch(this.getFullURL(`posts/${id}`), {
         method: "PUT",
         body: JSON.stringify(post),
         headers: {
-          Authorization: `Bearer ${token}`,
+          ...headers,
+          // Authorization: `Bearer ${token}`,
         
-          "Content-Type": "application/json",
+           "Content-Type": "application/json",
         },
       });
 
@@ -80,11 +82,13 @@ export class FileUpload {
     try {
       if (!id) throw new Error("Post ID is required.");
 
-      const response = await fetch(this.getFullUrl(`/posts/${id}`), {
+      const response = await fetch(this.getFullURL(`posts/${id}`), {
+       
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers, 
+        // {
+        //   Authorization: `Bearer ${token}`,
+        // },
       });
 
       
@@ -103,8 +107,8 @@ export class FileUpload {
   }
 
   
-  getFullUrl(endpoint) {
-    return `${this.baseUrl}${endpoint}`;
+  getFullURL(endpoint) {
+    return `${this.baseURL}${endpoint}`;
   }
 
   
@@ -119,3 +123,5 @@ export class FileUpload {
     };
   }
 }
+
+
